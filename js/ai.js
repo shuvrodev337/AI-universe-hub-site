@@ -9,23 +9,31 @@ const showAITools=(tools)=>{
 // console.log(tools);
 const toolsContainer=document.getElementById("tool-cards")
 tools.forEach(tool => {
-    console.log(tool);
     const {image,features,name,published_in}=tool
+    // console.log(image);
+    // console.log(features);
+    // console.log(name);
+    // console.log(published_in);
     const toolCardDiv=document.createElement("div")
     toolCardDiv.classList.add("col")
     toolCardDiv.innerHTML=`
     <div class="card h-100">
-                <img src="" class="card-img-top" alt="">
+                <img src="${image}" class="card-img-top" alt="">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <h5 class="card-title">Features</h5>
+                  <p class="card-text">1. ${features[0]}</p>
+                  <p class="card-text">2. ${features[1]}</p>
+                  <p class="card-text">3. ${features[2]}</p>
                 </div>
                 <div class="card-footer">
-                  <small class="text-muted">Last updated 3 mins ago</small>
+                 <h5 class="card-title">${name}</h5>
+
+                 <p class="card-text">1. ${published_in}</p>
+                  
                 </div>
     </div>
     
     `
-
+toolsContainer.appendChild(toolCardDiv)
 });
 }
