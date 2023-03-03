@@ -119,18 +119,18 @@ const fetchData = (showAll, sortDate) => {
     // const toolPrice=toolDetails?.pricing[0].price
     const toolBasicPrice=toolDetails.pricing?toolDetails.pricing[0].price:"No price details available for"
     const toolProPrice=toolDetails.pricing?toolDetails.pricing[1].price:"No price details available for"
-    const toolEnterprisePrice=toolDetails.pricing?toolDetails.pricing[2].price:"No info"
+    const toolEnterprisePrice=toolDetails.pricing?toolDetails.pricing[2].price:"No Cost"
       console.log(toolBasicPrice,toolProPrice,toolEnterprisePrice);
       const modalCardsConatainer=document.getElementById("tool-description")
       modalCardsConatainer.innerHTML=`
             <div class="col">
-              <div class="card h-100">
-                <div class="card-body  bg-danger bg-opacity-10">
+              <div class="card h-100 ">
+                <div class="card-body bg-danger bg-opacity-10 ">
                   <h5  class="card-title">${toolDescription}</h5>
-                  <div class="d-flex container-fluid gap-2">
-                  <p class="card-text bg-body p-3 rounded">${toolBasicPrice} Basic</p>
-                  <p class="card-text bg-body p-3 rounded">${toolProPrice} Pro</p>
-                  <p class="card-text bg-body p-3 rounded">${toolEnterprisePrice.slice(0,10)} Enterprise</p>
+                  <div class="d-flex container-fluid gap-2 fw-semibold text-center py-3">
+                  <p class="card-text bg-body p-4  text-success  rounded">${toolBasicPrice} Basic</p>
+                  <p class="card-text bg-body p-4  text-warning rounded">${toolProPrice} Pro</p>
+                  <p class="card-text bg-body p-4  text-danger rounded">${toolEnterprisePrice.slice(0,10)} Enterprise</p>
                   </div>
                 </div>
               </div>
