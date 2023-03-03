@@ -1,13 +1,19 @@
-const fetchData=()=>{
+const fetchData=(showAll)=>{
     const url=`https://openapi.programming-hero.com/api/ai/tools`
     fetch(url)
     .then(res=>res.json())
-    .then(data=> showAITools(data.data.tools))
+    .then(data=> showAITools(data.data.tools,showAll))
 }
 
-const showAITools=(tools)=>{
+const showAITools=(tools,showAll)=>{
 // console.log(tools);
 const toolsContainer=document.getElementById("tool-cards")
+
+
+if (showAll!==true) {
+    tools=tools.slice(0,6)
+
+}
 tools.forEach(tool => {
     const {image,features,name,published_in}=tool
     const toolCardDiv=document.createElement("div")
@@ -25,7 +31,7 @@ tools.forEach(tool => {
                       <p class="card-text">${published_in}</p>
                     </div>
                     <div>
-                      <button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-2xl fa-arrow-right"></i></button>
+                      <button onclick="showModal()" type="button" class="btn text-danger"><i class="fa-solid fa-2xl fa-arrow-right"></i></button>
                     </div>
                 </div>
     </div>
@@ -33,9 +39,9 @@ tools.forEach(tool => {
     `
 toolsContainer.appendChild(toolCardDiv)
 
-
 });
 
+toggleLoader(false)
 
 }
 
@@ -57,5 +63,45 @@ const showFeatures=(features)=> {
 }
 
 
+//handle show more button
+document.getElementById("show-more").addEventListener("click",function () {
+    
+    fetchData(true)
+    document.getElementById("button-div-more").classList.add("d-none")
+    toggleLoader(true)
+})
+
+// handle spinner
+const toggleLoader= isLoading =>{
+    if (isLoading) {
+      document.getElementById("loader").classList.toggle("d-none")
+    } else{
+      document.getElementById("loader").classList.toggle("d-none")
+    }
+  }
 
 
+//handle modal
+const showModal=()=>{
+    console.log("hello");
+}
+
+
+
+
+fetchData()
+
+
+
+
+
+
+//handle show less button
+// document.getElementById("show-more").addEventListener("click",function () {
+    
+//     fetchData(false)
+//     document.getElementById("button-div-more").classList.toggle("d-none")
+
+//     document.getElementById("button-div-less").classList.toggle("d-none")
+    
+// })

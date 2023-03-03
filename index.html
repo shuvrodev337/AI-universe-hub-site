@@ -11,7 +11,7 @@
     <!-- font awesome cdn goes here  -->
     <script src="https://kit.fontawesome.com/202445306c.js" crossorigin="anonymous"></script>
 </head>
-<body onload="fetchData()">
+<body onload="toggleLoader(true)">
   <header class="container text-center my-5">
     <h1 class="mb-5">AI Universe Hub</h1>
     <button type="button" class="btn btn-danger">Sort By Date</button>
@@ -24,7 +24,21 @@
             
             
           </div>
+         <div id="button-div-more" class="text-center my-5">
+
+           <button id="show-more" type="button" class="btn btn-danger">Show More</button>
+         </div>
     </section>
+
+          <!-- Spinner/loader -->
+          <section id="loader" class="d-none">
+            <div class="d-flex justify-content-center align-items-center" style="height: 400px;">
+              <div class="spinner-border text-danger" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+    
+          </section>
 </main>
 
 
