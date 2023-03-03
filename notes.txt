@@ -1,0 +1,3 @@
+                  <p class="card-text">${starterPrice} Basic</p>
+                  <p class="card-text">${proPrice} Pro</p>
+                  <p class="card-text">${enterPrisePrice.slice(0,10)} ${enterPrisePlan}</p>

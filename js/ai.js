@@ -105,27 +105,32 @@ const fetchData = (showAll, sortDate) => {
   };
 //   toolDetailModal
   const showToolDetail=(toolDetails)=>{
-      let {description,pricing,features,integrations}=toolDetails
-      let [{plan:starterPlan,price:starterPrice},{plan:proPlan,price:proPrice},{plan:enterPrisePlan,price:enterPrisePrice}]=pricing
+    //   let {description,pricing,features,integrations}=toolDetails
+    //   console.log(pricing);
+    //   let [{plan:starterPlan,price:starterPrice},{plan:proPlan,price:proPrice},{plan:enterPrisePlan,price:enterPrisePrice}]=pricing
 
-      console.log(starterPlan,starterPrice);
-      console.log(proPlan,proPrice);
-      console.log(enterPrisePlan,enterPrisePrice);
-    //   console.log( description);
-    //   console.log( pricing);
-    //   console.log( features);
-    //   console.log( integrations);
-      
+    //   for (const singlePrice of pricing) {
+    //     const starterPlan=singlePrice
+    //   }
+
+    //   console.log(starterPrice);
+    // console.log(pricing);
+    const toolDescription=toolDetails.description
+    // const toolPrice=toolDetails?.pricing[0].price
+    const toolBasicPrice=toolDetails.pricing?toolDetails.pricing[0].price:"No price details available for"
+    const toolProPrice=toolDetails.pricing?toolDetails.pricing[1].price:"No price details available for"
+    const toolEnterprisePrice=toolDetails.pricing?toolDetails.pricing[2].price:"No info"
+      console.log(toolBasicPrice,toolProPrice,toolEnterprisePrice);
       const modalCardsConatainer=document.getElementById("tool-description")
       modalCardsConatainer.innerHTML=`
             <div class="col">
               <div class="card h-100">
-                <div class="card-body">
-                  <h5  class="card-title">${description}</h5>
+                <div class="card-body  bg-danger bg-opacity-10">
+                  <h5  class="card-title">${toolDescription}</h5>
                   <div class="d-flex container-fluid gap-2">
-                  <p class="card-text">${starterPrice} Basic</p>
-                  <p class="card-text">${proPrice} Pro</p>
-                  <p class="card-text">${enterPrisePrice.slice(0,10)} ${enterPrisePlan}</p>
+                  <p class="card-text bg-body p-3 rounded">${toolBasicPrice} Basic</p>
+                  <p class="card-text bg-body p-3 rounded">${toolProPrice} Pro</p>
+                  <p class="card-text bg-body p-3 rounded">${toolEnterprisePrice.slice(0,10)} Enterprise</p>
                   </div>
                 </div>
               </div>
@@ -141,6 +146,19 @@ const fetchData = (showAll, sortDate) => {
     
     `
   }
+
+  //handl pricing
+  const showPricing = (pricings) => {
+    // console.log(pricings);
+    // const pricingsDiv = document.createElement("div");
+    // for (const singlePricePlan of pricings) {
+    //   const p = document.createElement("p");
+    //   p.innerText = ` ${singlePricePlan.price ? singlePricePlan.price:"No Pricing"}`;
+    //   pricingsDiv.appendChild(p);
+    // }
+    // return pricingsDiv.innerHTML;
+  };
+  
   
   fetchData();
   
