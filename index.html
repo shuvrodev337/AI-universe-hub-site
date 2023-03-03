@@ -14,7 +14,7 @@
 <body onload="toggleLoader(true)">
   <header class="container text-center my-5">
     <h1 class="mb-5">AI Universe Hub</h1>
-    <button type="button" class="btn btn-danger">Sort By Date</button>
+    <button onclick="fetchData(true,true)" type="button" class="btn btn-danger">Sort By Date</button>
   </header>
 
     
@@ -32,7 +32,7 @@
 
           <!-- Spinner/loader -->
           <section id="loader" class="d-none">
-            <div class="d-flex justify-content-center align-items-center" style="height: 400px;">
+            <div class="d-flex justify-content-center align-items-baseline" style="height: 400px;">
               <div class="spinner-border text-danger" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
