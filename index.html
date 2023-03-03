@@ -18,7 +18,7 @@
   </header>
 
     
-<main class="container ">
+<main class="container mb-5">
     <section class="tool-cards-container">
         <div id="tool-cards" class="row row-cols-1 row-cols-md-3 g-4">
             
@@ -29,6 +29,47 @@
            <button id="show-more" type="button" class="btn btn-danger">Show More</button>
          </div>
     </section>
+
+         <!-- modal -->
+<section>
+  <div class="modal fade bd-example-modal-lg" id="toolDetailModal" tabindex="-1" aria-labelledby="toolDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="toolDetailModalLabel"></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body  lg:d-flex container-fluid justify-content-center align-items-center gap-3">
+
+          <div  id="tool-description" class="row row-cols-1 row-cols-md-2 g-2"> 
+             <!-- <div class="col">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5  class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a short card.</p>
+                </div>
+              </div>
+            </div>  -->
+
+           </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
 
           <!-- Spinner/loader -->
           <section id="loader" class="d-none">

@@ -28,7 +28,7 @@ const fetchData = (showAll, sortDate) => {
   
   
     tools.forEach((tool) => {
-      let { image, features, name, published_in } = tool;
+      let { image, features, name, published_in,id } = tool;
       const toolCardDiv = document.createElement("div");
       published_in = new Date(published_in);
       published_in=published_in.toLocaleDateString("en-us",options)
@@ -47,7 +47,7 @@ const fetchData = (showAll, sortDate) => {
                         <p class="card-text"><i class="fa-regular fa-calendar-days"></i> ${published_in}</p>
                       </div>
                       <div>
-                        <button onclick="showModal()" type="button" class="btn text-danger"><i class="fa-solid fa-2xl fa-arrow-right"></i></button>
+                        <button onclick="fetchModalData('${id}')" type="button" class="btn text-danger" data-bs-toggle="modal" data-bs-target="#toolDetailModal"><i class="fa-solid fa-2xl fa-arrow-right"></i></button>
                       </div>
                   </div>
       </div>
@@ -96,19 +96,51 @@ const fetchData = (showAll, sortDate) => {
   };
   
   //handle modal
-  const showModal = () => {
-    console.log("hello");
+
+  const fetchModalData = (id) => {
+    const url=`https://openapi.programming-hero.com/api/ai/tool/${id}`
+    fetch(url)
+    .then(res=>res.json())
+    .then(data=>showToolDetail(data.data))
   };
+//   toolDetailModal
+  const showToolDetail=(toolDetails)=>{
+      let {description,pricing,features,integrations}=toolDetails
+      let [{plan:starterPlan,price:starterPrice},{plan:proPlan,price:proPrice},{plan:enterPrisePlan,price:enterPrisePrice}]=pricing
+
+      console.log(starterPlan,starterPrice);
+      console.log(proPlan,proPrice);
+      console.log(enterPrisePlan,enterPrisePrice);
+    //   console.log( description);
+    //   console.log( pricing);
+    //   console.log( features);
+    //   console.log( integrations);
+      
+      const modalCardsConatainer=document.getElementById("tool-description")
+      modalCardsConatainer.innerHTML=`
+            <div class="col">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5  class="card-title">${description}</h5>
+                  <div class="d-flex container-fluid gap-2">
+                  <p class="card-text">${starterPrice} Basic</p>
+                  <p class="card-text">${proPrice} Pro</p>
+                  <p class="card-text">${enterPrisePrice.slice(0,10)} ${enterPrisePlan}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title">My Tool</h5>
+                  <p class="card-text">This is a short card.</p>
+                </div>
+              </div>
+            </div> 
+    
+    `
+  }
   
   fetchData();
-  
-  //handle show less button
-  // document.getElementById("show-more").addEventListener("click",function () {
-  
-  //     fetchData(false)
-  //     document.getElementById("button-div-more").classList.toggle("d-none")
-  
-  //     document.getElementById("button-div-less").classList.toggle("d-none")
-  
-  // })
   
