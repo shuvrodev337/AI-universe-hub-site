@@ -134,7 +134,7 @@ console.log(input_output_examples?input_output_examples[0].input:"NO input Examp
             <div class="col">
               <div class="card h-100">
                 <div class="card-body">
-                <img class="card-img-top" src="${image_link[0]}" alt="">
+                <img class="card-img-top rounded-4" src="${image_link[0]}" alt="">
                   <h5 class="card-title  py-5">${input_output_examples?input_output_examples[0].input:"NO input examples to show"}</h5>
                   <p class="card-text">${input_output_examples?input_output_examples[0].output:"NO output examples to show"}</p>
                 </div>
@@ -160,7 +160,6 @@ console.log(input_output_examples?input_output_examples[0].input:"NO input Examp
   // handle modal tool card integrations
 const showIntegrations=(integrations)=>{
   const integrationsListDiv = document.createElement("div");
-  // integrationsListDiv.classList.add("")
   for (const integration of integrations) {
       const li = document.createElement("li");
       li.classList.add("fw-lighter")
@@ -172,7 +171,6 @@ const showIntegrations=(integrations)=>{
 //handle modal tool card features
 const showModalToolFeatures=(items)=>{
   const itemsDiv = document.createElement("div");
-  // itemsDiv.classList.add("")
 
   for (const key in items) {
       const li = document.createElement("li");
@@ -183,6 +181,6 @@ const showModalToolFeatures=(items)=>{
     return itemsDiv.innerHTML
 }
 
-
+// Fetch Data on load
   fetchData();
   
