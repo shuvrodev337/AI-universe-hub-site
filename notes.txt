@@ -1,0 +1,9 @@
+// const toolBasicPrice=toolDetails.pricing?toolDetails.pricing[0].price:"No price details available for"
+    // const toolProPrice=toolDetails.pricing?toolDetails.pricing[1].price:"No price details available for"
+    // const toolEnterprisePrice=toolDetails.pricing?toolDetails.pricing[2].price:"No Cost"
+
+
+
+                  <p class="card-text bg-body p-4  text-success  rounded">${toolBasicPrice} Basic</p>
+                  <p class="card-text bg-body p-4  text-warning rounded">${toolProPrice} Pro</p>
+                  <p class="card-text bg-body p-4  text-danger rounded">${toolEnterprisePrice.slice(0,10)} Enterprise</p>

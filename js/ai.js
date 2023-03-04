@@ -105,42 +105,25 @@ const fetchData = (showAll, sortDate) => {
   };
 //   toolDetailModal
   const showToolDetail=(toolDetails)=>{
-      let {features,integrations}=toolDetails
-      // console.log(features,integrations?integrations:"No Data Found");
-    //   let [{plan:starterPlan,price:starterPrice},{plan:proPlan,price:proPrice},{plan:enterPrisePlan,price:enterPrisePrice}]=pricing
-
-    //   for (const singlePrice of pricing) {
-    //     const starterPlan=singlePrice
-    //   }
-
-    //   console.log(starterPrice);
-    // console.log(pricing);
-    const toolDescription=toolDetails.description
-    // console.log(toolDescription);
-    // const toolPrice=toolDetails?.pricing[0].price
-    const toolBasicPrice=toolDetails.pricing?toolDetails.pricing[0].price:"No price details available for"
-    const toolProPrice=toolDetails.pricing?toolDetails.pricing[1].price:"No price details available for"
-    const toolEnterprisePrice=toolDetails.pricing?toolDetails.pricing[2].price:"No Cost"
-      // console.log(toolBasicPrice,toolProPrice,toolEnterprisePrice);
+      let {pricing,features,integrations,image_link,input_output_examples}=toolDetails
+console.log(input_output_examples?input_output_examples[0].input:"NO input Examples",input_output_examples?input_output_examples[0].output:"NO output Examples");
       const modalCardsConatainer=document.getElementById("tool-description")
       modalCardsConatainer.innerHTML=`
             <div class="col">
               <div class="card h-100 ">
                 <div class="card-body bg-danger bg-opacity-10 ">
-                  <h5  class="card-title">${toolDescription}</h5>
+                  <h5  class="card-title">${toolDetails.description}</h5>
                   <div class="d-flex container-fluid gap-2 fw-semibold text-center py-3">
-                  <p class="card-text bg-body p-4  text-success  rounded">${toolBasicPrice} Basic</p>
-                  <p class="card-text bg-body p-4  text-warning rounded">${toolProPrice} Pro</p>
-                  <p class="card-text bg-body p-4  text-danger rounded">${toolEnterprisePrice.slice(0,10)} Enterprise</p>
+                        ${pricing?showPricing(pricing):"No cost Found"}
                   </div>
                   <div class="d-flex container-fluid gap-3 fw-semibold justify-content-evenly text-center">
 
-                    <div>
+                    <div class="text-start">
                       <h5 class="fw-semibold">Features</h5>
-                      ${features?showItems(features):"No Data Found"}
+                      ${features?showModalToolFeatures(features):"No Data Found"}
                       
                     </div>
-                    <div>
+                    <div class="text-start">
                       <h5 class="fw-semibold">Integrations</h5>
                       ${integrations?showIntegrations(integrations):"No Data Found"}
                     </div>
@@ -151,8 +134,9 @@ const fetchData = (showAll, sortDate) => {
             <div class="col">
               <div class="card h-100">
                 <div class="card-body">
-                  <h5 class="card-title">My Tool</h5>
-                  <p class="card-text">This is a short card.</p>
+                <img class="card-img-top" src="${image_link[0]}" alt="">
+                  <h5 class="card-title  py-5">${input_output_examples?input_output_examples[0].input:"NO input examples to show"}</h5>
+                  <p class="card-text">${input_output_examples?input_output_examples[0].output:"NO output examples to show"}</p>
                 </div>
               </div>
             </div> 
@@ -160,34 +144,39 @@ const fetchData = (showAll, sortDate) => {
     `
   }
 
-  //handl pricing
+  //handle pricing
   const showPricing = (pricings) => {
-    // console.log(pricings);
-    // const pricingsDiv = document.createElement("div");
-    // for (const singlePricePlan of pricings) {
-    //   const p = document.createElement("p");
-    //   p.innerText = ` ${singlePricePlan.price ? singlePricePlan.price:"No Pricing"}`;
-    //   pricingsDiv.appendChild(p);
-    // }
-    // return pricingsDiv.innerHTML;
+    
+    const pricingsDiv = document.createElement("div");
+    for (const singlePrice of pricings) {
+      const p = document.createElement("p");
+      p.classList.add("card-text","bg-body","p-4","text-success","rounded")
+      p.innerText = ` ${singlePrice.price} ${singlePrice.plan}`;
+      pricingsDiv.appendChild(p);
+    }
+    return pricingsDiv.innerHTML;
   };
   
-  // handle integrations
+  // handle modal tool card integrations
 const showIntegrations=(integrations)=>{
-  // integrations?integrations:"No Data Found"
   const integrationsListDiv = document.createElement("div");
+  // integrationsListDiv.classList.add("")
   for (const integration of integrations) {
       const li = document.createElement("li");
-      li.innerText = ` ${integrations?integration:"No Data Found"}`;
+      li.classList.add("fw-lighter")
+      li.innerText = ` ${integration}`;
       integrationsListDiv.appendChild(li);
     }
     return integrationsListDiv.innerHTML
 }
-const showItems=(items)=>{
-  // integrations?integrations:"No Data Found"
+//handle modal tool card features
+const showModalToolFeatures=(items)=>{
   const itemsDiv = document.createElement("div");
+  // itemsDiv.classList.add("")
+
   for (const key in items) {
       const li = document.createElement("li");
+      li.classList.add("fw-lighter")
       li.innerText = ` ${items[key].feature_name}`;
       itemsDiv.appendChild(li);
     }
