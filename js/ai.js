@@ -96,7 +96,7 @@ const fetchData = (showAll, sortDate) => {
   };
   
   //handle modal
-
+let  badgeVisibility=true
   const fetchModalData = (id) => {
     const url=`https://openapi.programming-hero.com/api/ai/tool/${id}`
     fetch(url)
@@ -135,8 +135,8 @@ const fetchData = (showAll, sortDate) => {
               <div class="card h-100">
                 <div class="card-body"> 
                 <div>
-                <span onload="${checkAccuracy(accuracy)}" id="accuracy-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                ${accuracy.score?accuracy.score:''}
+                <span id="accuracy-badge" class="position-absolute top-0 start-100 ${checkAccuracy(accuracy)} translate-middle badge rounded-pill bg-danger p-2">
+                ${accuracy.score} % accuracy
               </span>
                 <img class="card-img-top rounded-4" src="${image_link[0]}" alt="">
                 </div>
@@ -149,12 +149,14 @@ const fetchData = (showAll, sortDate) => {
     `
   }
   // <span class="visually-hidden">unread messages</span>
+  // ?accuracy.score:"no data"
   const checkAccuracy=(accuracy)=>{
     if (!accuracy.score) {
-      console.log("hello");
-      document.getElementById("accuracy-badge").classList.add("visually-hidden")
+     return 'visually-hidden'
     }
+    return ""
   }
+ 
   //handle pricing
   const showPricing = (pricings) => {
     
