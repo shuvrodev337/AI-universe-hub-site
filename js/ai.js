@@ -149,7 +149,7 @@ const showToolDetail = (toolDetails) => {
                 <span id="accuracy-badge" class="position-absolute top-0 start-100 ${checkAccuracy(
                   accuracy
                 )} translate-middle badge rounded-pill bg-danger p-2">
-                ${accuracy.score} % accuracy
+                ${accuracy.score}% accuracy
               </span>
                 <img class="card-img-top rounded-4" src="${
                   image_link[0]
