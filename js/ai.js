@@ -105,8 +105,8 @@ const fetchData = (showAll, sortDate) => {
   };
 //   toolDetailModal
   const showToolDetail=(toolDetails)=>{
-    //   let {description,pricing,features,integrations}=toolDetails
-    //   console.log(pricing);
+      let {features,integrations}=toolDetails
+      // console.log(features,integrations?integrations:"No Data Found");
     //   let [{plan:starterPlan,price:starterPrice},{plan:proPlan,price:proPrice},{plan:enterPrisePlan,price:enterPrisePrice}]=pricing
 
     //   for (const singlePrice of pricing) {
@@ -116,11 +116,12 @@ const fetchData = (showAll, sortDate) => {
     //   console.log(starterPrice);
     // console.log(pricing);
     const toolDescription=toolDetails.description
+    // console.log(toolDescription);
     // const toolPrice=toolDetails?.pricing[0].price
     const toolBasicPrice=toolDetails.pricing?toolDetails.pricing[0].price:"No price details available for"
     const toolProPrice=toolDetails.pricing?toolDetails.pricing[1].price:"No price details available for"
     const toolEnterprisePrice=toolDetails.pricing?toolDetails.pricing[2].price:"No Cost"
-      console.log(toolBasicPrice,toolProPrice,toolEnterprisePrice);
+      // console.log(toolBasicPrice,toolProPrice,toolEnterprisePrice);
       const modalCardsConatainer=document.getElementById("tool-description")
       modalCardsConatainer.innerHTML=`
             <div class="col">
@@ -131,6 +132,18 @@ const fetchData = (showAll, sortDate) => {
                   <p class="card-text bg-body p-4  text-success  rounded">${toolBasicPrice} Basic</p>
                   <p class="card-text bg-body p-4  text-warning rounded">${toolProPrice} Pro</p>
                   <p class="card-text bg-body p-4  text-danger rounded">${toolEnterprisePrice.slice(0,10)} Enterprise</p>
+                  </div>
+                  <div class="d-flex container-fluid gap-3 fw-semibold justify-content-evenly text-center">
+
+                    <div>
+                      <h5 class="fw-semibold">Features</h5>
+                      ${features?showItems(features):"No Data Found"}
+                      
+                    </div>
+                    <div>
+                      <h5 class="fw-semibold">Integrations</h5>
+                      ${integrations?showIntegrations(integrations):"No Data Found"}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -159,6 +172,28 @@ const fetchData = (showAll, sortDate) => {
     // return pricingsDiv.innerHTML;
   };
   
-  
+  // handle integrations
+const showIntegrations=(integrations)=>{
+  // integrations?integrations:"No Data Found"
+  const integrationsListDiv = document.createElement("div");
+  for (const integration of integrations) {
+      const li = document.createElement("li");
+      li.innerText = ` ${integrations?integration:"No Data Found"}`;
+      integrationsListDiv.appendChild(li);
+    }
+    return integrationsListDiv.innerHTML
+}
+const showItems=(items)=>{
+  // integrations?integrations:"No Data Found"
+  const itemsDiv = document.createElement("div");
+  for (const key in items) {
+      const li = document.createElement("li");
+      li.innerText = ` ${items[key].feature_name}`;
+      itemsDiv.appendChild(li);
+    }
+    return itemsDiv.innerHTML
+}
+
+
   fetchData();
   
