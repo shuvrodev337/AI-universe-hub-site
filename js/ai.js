@@ -105,8 +105,8 @@ const fetchData = (showAll, sortDate) => {
   };
 //   toolDetailModal
   const showToolDetail=(toolDetails)=>{
-      let {pricing,features,integrations,image_link,input_output_examples}=toolDetails
-console.log(input_output_examples?input_output_examples[0].input:"NO input Examples",input_output_examples?input_output_examples[0].output:"NO output Examples");
+      let {pricing,features,integrations,image_link,input_output_examples,accuracy}=toolDetails
+// console.log(accuracy.score);
       const modalCardsConatainer=document.getElementById("tool-description")
       modalCardsConatainer.innerHTML=`
             <div class="col">
@@ -114,7 +114,7 @@ console.log(input_output_examples?input_output_examples[0].input:"NO input Examp
                 <div class="card-body bg-danger bg-opacity-10 ">
                   <h5  class="card-title">${toolDetails.description}</h5>
                   <div class="d-flex container-fluid gap-2 fw-semibold text-center py-3">
-                        ${pricing?showPricing(pricing):"No cost Found"}
+                        ${pricing?showPricing(pricing):"Free Of Cost/"}
                   </div>
                   <div class="d-flex container-fluid gap-3 fw-semibold justify-content-evenly text-center">
 
@@ -133,17 +133,28 @@ console.log(input_output_examples?input_output_examples[0].input:"NO input Examp
             </div>
             <div class="col">
               <div class="card h-100">
-                <div class="card-body">
+                <div class="card-body"> 
+                <div>
+                <span onload="${checkAccuracy(accuracy)}" id="accuracy-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                ${accuracy.score?accuracy.score:''}
+              </span>
                 <img class="card-img-top rounded-4" src="${image_link[0]}" alt="">
-                  <h5 class="card-title  py-5">${input_output_examples?input_output_examples[0].input:"NO input examples to show"}</h5>
-                  <p class="card-text">${input_output_examples?input_output_examples[0].output:"NO output examples to show"}</p>
+                </div>
+                  <h5 class="card-title  py-3">${input_output_examples?input_output_examples[0].input:"Can you give any example?"}</h5>
+                  <p class="card-text">${input_output_examples?input_output_examples[0].output:"No! Not Yet! Take a break!!!"}</p>
                 </div>
               </div>
             </div> 
     
     `
   }
-
+  // <span class="visually-hidden">unread messages</span>
+  const checkAccuracy=(accuracy)=>{
+    if (!accuracy.score) {
+      console.log("hello");
+      document.getElementById("accuracy-badge").classList.add("visually-hidden")
+    }
+  }
   //handle pricing
   const showPricing = (pricings) => {
     
@@ -151,7 +162,7 @@ console.log(input_output_examples?input_output_examples[0].input:"NO input Examp
     for (const singlePrice of pricings) {
       const p = document.createElement("p");
       p.classList.add("card-text","bg-body","p-4","text-success","rounded")
-      p.innerText = ` ${singlePrice.price} ${singlePrice.plan}`;
+      p.innerText = ` ${singlePrice.price} / ${singlePrice.plan}`;
       pricingsDiv.appendChild(p);
     }
     return pricingsDiv.innerHTML;
@@ -179,6 +190,11 @@ const showModalToolFeatures=(items)=>{
       itemsDiv.appendChild(li);
     }
     return itemsDiv.innerHTML
+}
+// handle badge invisibility
+const dismissBadge=(id)=>{
+  // document.getElementById(id).classList.add("d-none")
+
 }
 
 // Fetch Data on load
