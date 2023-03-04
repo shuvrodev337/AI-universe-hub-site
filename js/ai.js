@@ -5,6 +5,7 @@ const fetchData = (showAll, sortDate) => {
       .then((data) => showAITools(data.data.tools, showAll, sortDate));
   };
   
+  //-------handle show tools----------//
   const showAITools = (tools, showAll, sortDate) => {
     const toolsContainer = document.getElementById("tool-cards");
     toolsContainer.innerHTML = "";
@@ -18,11 +19,12 @@ const fetchData = (showAll, sortDate) => {
     if (showAll !== true) {
       tools = tools.slice(0, 6);
     }
+    
     let options={
-        weekday:'long',
-        year:'numeric',
-        month:'long',
-        day:'numeric'
+        
+      day:'numeric',
+      month:'numeric',
+        year:'numeric'
     }
   
   
@@ -59,6 +61,7 @@ const fetchData = (showAll, sortDate) => {
     toggleLoader(false);
   };
   
+  //handle sorting tools by publishing date
   const sortByDate = (tools) => {
     tools.forEach((tool) => {
       tool.published_in = new Date(tool.published_in);
@@ -66,7 +69,7 @@ const fetchData = (showAll, sortDate) => {
     tools.sort((a, b) => b.published_in - a.published_in);
   };
   
-  // Handle features of tool card
+  // handle features of tool card
   const showFeatures = (features) => {
     let count = 0;
     const featureDiv = document.createElement("div");
@@ -95,8 +98,10 @@ const fetchData = (showAll, sortDate) => {
     }
   };
   
-  //handle modal
-let  badgeVisibility=true
+
+
+  //------------------handle modal-------------------------//
+
   const fetchModalData = (id) => {
     const url=`https://openapi.programming-hero.com/api/ai/tool/${id}`
     fetch(url)
@@ -106,8 +111,8 @@ let  badgeVisibility=true
 //   toolDetailModal
   const showToolDetail=(toolDetails)=>{
       let {pricing,features,integrations,image_link,input_output_examples,accuracy}=toolDetails
-// console.log(accuracy.score);
       const modalCardsConatainer=document.getElementById("tool-description")
+      console.log(pricing);
       modalCardsConatainer.innerHTML=`
             <div class="col">
               <div class="card h-100 ">
@@ -134,12 +139,12 @@ let  badgeVisibility=true
             <div class="col">
               <div class="card h-100">
                 <div class="card-body"> 
-                <div>
+
                 <span id="accuracy-badge" class="position-absolute top-0 start-100 ${checkAccuracy(accuracy)} translate-middle badge rounded-pill bg-danger p-2">
                 ${accuracy.score} % accuracy
               </span>
                 <img class="card-img-top rounded-4" src="${image_link[0]}" alt="">
-                </div>
+
                   <h5 class="card-title  py-3">${input_output_examples?input_output_examples[0].input:"Can you give any example?"}</h5>
                   <p class="card-text">${input_output_examples?input_output_examples[0].output:"No! Not Yet! Take a break!!!"}</p>
                 </div>
@@ -148,8 +153,8 @@ let  badgeVisibility=true
     
     `
   }
-  // <span class="visually-hidden">unread messages</span>
-  // ?accuracy.score:"no data"
+
+  // handle badge visibility
   const checkAccuracy=(accuracy)=>{
     if (!accuracy.score) {
      return 'visually-hidden'
@@ -157,7 +162,7 @@ let  badgeVisibility=true
     return ""
   }
  
-  //handle pricing
+  //handle pricing on modal
   const showPricing = (pricings) => {
     
     const pricingsDiv = document.createElement("div");
@@ -181,6 +186,7 @@ const showIntegrations=(integrations)=>{
     }
     return integrationsListDiv.innerHTML
 }
+
 //handle modal tool card features
 const showModalToolFeatures=(items)=>{
   const itemsDiv = document.createElement("div");
@@ -193,12 +199,7 @@ const showModalToolFeatures=(items)=>{
     }
     return itemsDiv.innerHTML
 }
-// handle badge invisibility
-const dismissBadge=(id)=>{
-  // document.getElementById(id).classList.add("d-none")
 
-}
-
-// Fetch Data on load
+//------- Fetch Data on load------//
   fetchData();
   
